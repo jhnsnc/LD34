@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>LASER COMMAND</title>
+  <style type="text/css">
+  body {
+    margin: 0;
+  }
+  </style>
+  <!-- libraries -->
+  <script type="text/javascript" src="lib/phaser.min.js"></script>
+  <script type="text/javascript" src="lib/lodash.min.js"></script>
+  <!-- game scripts -->
+  <script type="text/javascript" src="js/game.js"></script>
+  <!-- misc -->
+  <!-- 
+    <script type="text/javascript" src="js/utils.js"></script>
+    <script type="text/javascript" src="js/consts.js"></script>
+    -->
+  <!-- managers -->
+  <!-- 
+    <script type="text/javascript" src="js/player.js"></script>
+    -->
+  <!-- game states -->
+  <!-- 
+    <script type="text/javascript" src="js/states/boot.js"></script>
+    <script type="text/javascript" src="js/states/preload.js"></script>
+    <script type="text/javascript" src="js/states/title.js"></script>
+    <script type="text/javascript" src="js/states/intro.js"></script>
+    <script type="text/javascript" src="js/states/battle.js"></script>
+    <script type="text/javascript" src="js/states/battle-combat.js"></script>
+    <script type="text/javascript" src="js/states/battle-monsters.js"></script>
+    <script type="text/javascript" src="js/states/battle-ui-setup.js"></script>
+    <script type="text/javascript" src="js/states/battle-ui-interaction.js"></script>
+    <script type="text/javascript" src="js/states/victory.js"></script>
+    <script type="text/javascript" src="js/states/defeat.js"></script>
+    -->
+</head>
+
+<body>
+  <script type="text/javascript">
+  //for Google WebFont Loader
+  WebFontConfig = {
+      google: {
+        families: ['Ubuntu:300,400,700']
+      }
+  };
+
+  (function() {
+    var game = new Phaser.Game(1080, 600, Phaser.AUTO, "game", {
+      create: init
+    }, false, false);
+
+    function init() {
+      game.state.add("Boot", bootState);
+      game.state.add("Preload", preloadState);
+      game.state.add("Title", titleState);
+      game.state.add("Intro", introState);
+      game.state.add("Battle", battleState);
+      game.state.add("Victory", victoryState);
+      game.state.add("Defeat", defeatState);
+
+      game.state.start("Boot");
+    }
+  })();
+  </script>
+  <div id="no-js-warning" style="z-index: -10; position: absolute;">
+    <h1>Hey! You need to enable JavaScript in order to play this game.</h1>
+    <p>If you&rsquo;re still having trouble, you can <a href="mailto:jhnsn.c@gmail.com">send the developer a quick email</a>.</p>
+  </div>
+  <script type="text/javascript">
+  (function() {
+    setTimeout(function() {
+      document.getElementById('no-js-warning').remove();
+    }, 1);
+  })();
+  </script>
+</body>
+
+</html>
