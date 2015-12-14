@@ -35,8 +35,19 @@ var defeatState = function(game) {};
       //level achieved text
       txtLvlAchieved = createGameText({
         x: 540,
-        y: 525,
+        y: 500,
         text: 'level reached: ' + this.game.level,
+        fontSize: 30,
+        strokeThickness: 8
+      }, this);
+      txtLvlAchieved.fontWeight = 300;
+      txtLvlAchieved.anchor.setTo(0.5, 0.5);
+      this.displayElements.add(txtLvlAchieved);
+
+      txtLvlAchieved = createGameText({
+        x: 540,
+        y: 550,
+        text: 'difficulty: ' + this.game.difficulty,
         fontSize: 30,
         strokeThickness: 8
       }, this);

@@ -37,7 +37,7 @@ battleState.prototype.spawnEnemy = function(spawnerNumber) {
 };
 
 battleState.prototype.getEnemySpawnTime = function(spawnerNumber) {
-  var baseMult = Math.pow(ENEMY_SPAWN_TIMING_ESCALATION, this.game.level);
+  var baseMult = Math.pow(ENEMY_SPAWN_TIMING_ESCALATION, this.getEffectiveLevel());
   var time, r;
 
   switch(spawnerNumber) {
@@ -48,7 +48,7 @@ battleState.prototype.getEnemySpawnTime = function(spawnerNumber) {
       time = 2.2 * baseMult * ENEMY_SPAWN_TIMING_BASE;
       break;
     case 3:
-      r = Math.max(0.5, 2.2 + (2.0 - (this.game.level * ENEMY_SPAWN_TIMING_X_ESCALATION)));
+      r = Math.max(0.5, 2.2 + (2.0 - (this.getEffectiveLevel() * ENEMY_SPAWN_TIMING_X_ESCALATION)));
       time = r * baseMult * ENEMY_SPAWN_TIMING_BASE;
       break;
   }
@@ -74,7 +74,7 @@ battleState.prototype.createNewEnemy = function() {
 
   //roll for chance to have shield
   r = Math.random();
-  if (r < ENEMY_SPAWN_SHIELD_BASE + (ENEMY_SPAWN_SHIELD_ESCALATION * this.game.level)) {
+  if (r < ENEMY_SPAWN_SHIELD_BASE + (ENEMY_SPAWN_SHIELD_ESCALATION * this.getEffectiveLevel())) {
     //has shield
     r = Math.floor(Math.random() * 2);
     if (r == 0) {

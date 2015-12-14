@@ -36,6 +36,16 @@ var battleState = function(game) {};
       txtCurrentLevel.fontWeight = 300;
       txtCurrentLevel.anchor.setTo(0.0, 0.5);
 
+      txtCurrentLevel = createGameText({
+        x: 40,
+        y: 100,
+        text: '(' + this.game.difficulty + ')',
+        fontSize: 24,
+        strokeThickness: 8
+      }, this);
+      txtCurrentLevel.fontWeight = 300;
+      txtCurrentLevel.anchor.setTo(0.0, 0.5);
+
       //player elements
       this.setupTurret();
       this.setupBases();
@@ -99,7 +109,7 @@ var battleState = function(game) {};
     this.spawnTimer3 = this.game.time.events.add(Math.random() * this.getEnemySpawnTime(3), this.spawnEnemy, this, 3);
 
     //victory condition timer
-    time = LEVEL_DURATION_BASE + (LEVEL_DURATION_GROWTH * this.game.level);
+    time = LEVEL_DURATION_BASE + (LEVEL_DURATION_GROWTH * this.getEffectiveLevel());
     this.levelCompleteTimer = this.game.time.events.add(time, this.setupVictoryOrDeath, this);
   };
 
@@ -260,6 +270,24 @@ var battleState = function(game) {};
     }
     if (this.spawnTimer3) {
       this.game.time.events.remove(this.spawnTimer3);
+    }
+  };
+
+  battleState.prototype.getEffectiveLevel = function() {
+    switch(this.game.difficulty) {
+      case "demon":
+        return this.game.level + 15;
+        break;
+      case "normal":
+        return this.game.level + 10;
+        break;
+      case "easy":
+        return this.game.level + 5;
+        break;
+      case "beginner":
+      default:
+        return this.game.level;
+        break;
     }
   };
 

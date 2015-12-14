@@ -49,7 +49,7 @@ var introState = function(game) {};
       //title
       txtTitle = createGameText({
         x: 540,
-        y: 90,
+        y: 70,
         text: 'How to play',
         fontSize: 60,
         strokeThickness: 8
@@ -63,7 +63,7 @@ var introState = function(game) {};
         "Aim with your mouse cursor.";
       txtParagraph = createGameText({
         x: 140,
-        y: 160,
+        y: 140,
         text: text,
         fontSize: 30,
         strokeThickness: 5
@@ -75,7 +75,7 @@ var introState = function(game) {};
       text = "Keep your base alive as long as you can!";
       txtParagraph = createGameText({
         x: 140,
-        y: 300,
+        y: 250,
         text: text,
         fontSize: 30,
         strokeThickness: 5
@@ -87,7 +87,7 @@ var introState = function(game) {};
       text = "Adjust the volume for your browser before continuing!";
       txtParagraph = createGameText({
         x: 140,
-        y: 380,
+        y: 315,
         text: text,
         fontSize: 30,
         strokeThickness: 5,
@@ -96,16 +96,30 @@ var introState = function(game) {};
       txtParagraph.wordWrap = true;
       txtParagraph.wordWrapWidth = 800;
       this.displayElements.add(txtParagraph);
+
       text = "(Maybe I\'ll add a volume control later. Sorry!)";
       txtParagraph = createGameText({
         x: 140,
-        y: 425,
+        y: 355,
         text: text,
         fontSize: 25,
         strokeThickness: 5,
         fill: '#00a9ef'
       }, this);
       txtParagraph.fontWeight = 300;
+      txtParagraph.wordWrap = true;
+      txtParagraph.wordWrapWidth = 800;
+      this.displayElements.add(txtParagraph);
+
+      text = "Select difficulty:";
+      txtParagraph = createGameText({
+        x: 140,
+        y: 420,
+        text: text,
+        fontSize: 30,
+        strokeThickness: 5,
+        fill: '#ef0098'
+      }, this);
       txtParagraph.wordWrap = true;
       txtParagraph.wordWrapWidth = 800;
       this.displayElements.add(txtParagraph);
@@ -123,18 +137,56 @@ var introState = function(game) {};
 
       //start game button
       btnStartGame = createGameText({
-        x: 900,
-        y: 530,
-        text: 'Start!',
-        fontSize: 50,
+        x: 500,
+        y: 415,
+        text: 'Beginner',
+        fontSize: 40,
         strokeThickness: 0,
         fill: '#ef0098'
       }, this);
-      btnStartGame.anchor.setTo(1.0, 0.5);
       this.displayElements.add(btnStartGame);
       btnStartGame.inputEnabled = true;
       btnStartGame.input.useHandCursor = true;
-      btnStartGame.events.onInputDown.add(this.beginNextBattle, this);
+      btnStartGame.events.onInputDown.add(this.startBeginnerGame, this);
+
+      btnStartGame = createGameText({
+        x: 750,
+        y: 415,
+        text: 'Easy',
+        fontSize: 40,
+        strokeThickness: 0,
+        fill: '#ef0098'
+      }, this);
+      this.displayElements.add(btnStartGame);
+      btnStartGame.inputEnabled = true;
+      btnStartGame.input.useHandCursor = true;
+      btnStartGame.events.onInputDown.add(this.startEasyGame, this);
+
+      btnStartGame = createGameText({
+        x: 500,
+        y: 485,
+        text: 'Normal',
+        fontSize: 40,
+        strokeThickness: 0,
+        fill: '#ef0098'
+      }, this);
+      this.displayElements.add(btnStartGame);
+      btnStartGame.inputEnabled = true;
+      btnStartGame.input.useHandCursor = true;
+      btnStartGame.events.onInputDown.add(this.startNormalGame, this);
+
+      btnStartGame = createGameText({
+        x: 750,
+        y: 485,
+        text: 'Demon',
+        fontSize: 40,
+        strokeThickness: 0,
+        fill: '#ef0098'
+      }, this);
+      this.displayElements.add(btnStartGame);
+      btnStartGame.inputEnabled = true;
+      btnStartGame.input.useHandCursor = true;
+      btnStartGame.events.onInputDown.add(this.startDemonGame, this);
 
       //fade in elements
       this.game.add.tween(this.displayElements)
@@ -147,9 +199,8 @@ var introState = function(game) {};
 
       this.listenForPageKeys();
     },
-    beginNextBattle: function(sprite, pointer) {
-
-      console.log("starting level " + this.game.level);
+    beginNextBattle: function() {
+      console.log("starting level " + this.game.level + " on " + this.game.difficulty + " difficulty");
 
       this.game.add.tween(this.displayElements)
         .to({
@@ -180,6 +231,22 @@ var introState = function(game) {};
     updateLevelDisplay: function() {
       this.txtCurrentLevel.alpha = 1.0;
       this.txtCurrentLevel.text = "Level: "+this.game.level;
+    },
+    startBeginnerGame: function() {
+      this.game.difficulty = "beginner";
+      this.beginNextBattle();
+    },
+    startEasyGame: function() {
+      this.game.difficulty = "easy";
+      this.beginNextBattle();
+    },
+    startNormalGame: function() {
+      this.game.difficulty = "normal";
+      this.beginNextBattle();
+    },
+    startDemonGame: function() {
+      this.game.difficulty = "demon";
+      this.beginNextBattle();
     }
   };
 })();

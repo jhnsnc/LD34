@@ -15,7 +15,7 @@ var victoryState = function(game) {};
       //title
       txtTitle = createGameText({
         x: 540,
-        y: 150,
+        y: 140,
         text: 'Victory!',
         fontSize: 80,
         strokeThickness: 8
@@ -27,15 +27,25 @@ var victoryState = function(game) {};
       txtLevel = createGameText({
         x: 540,
         y: 280,
-        text: 'level ' + (this.game.level) + ' cleared!',
+        text: 'you survived level ' + (this.game.level) + '!',
         fontSize: 40,
         strokeThickness: 8
       }, this);
       txtLevel.anchor.setTo(0.5, 0.5);
       this.displayElements.add(txtLevel);
+      txtLevel = createGameText({
+        x: 540,
+        y: 330,
+        text: '(' + (this.game.difficulty) + ' difficulty)',
+        fontSize: 40,
+        strokeThickness: 8
+      }, this);
+      txtLevel.fontWeight = 300;
+      txtLevel.anchor.setTo(0.5, 0.5);
+      this.displayElements.add(txtLevel);
 
       //button
-      btnStartGame = this.game.add.sprite(540, 440, "button-Continue");
+      btnStartGame = this.game.add.sprite(540, 450, "button-Continue");
       btnStartGame.anchor.setTo(0.5, 0.5);
       btnStartGame.inputEnabled = true;
       btnStartGame.input.useHandCursor = true;
@@ -53,7 +63,7 @@ var victoryState = function(game) {};
     },
     beginNextBattle: function(sprite, pointer) {
       this.game.level += 1;
-      console.log("starting level " + this.game.level);
+      console.log("starting level " + this.game.level + " on " + this.game.difficulty + " difficulty");
 
       this.game.add.tween(this.displayElements)
         .to({
